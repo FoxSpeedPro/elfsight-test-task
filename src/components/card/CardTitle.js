@@ -13,9 +13,7 @@ const GENDER_ICON_MAP = {
 };
 
 export function CardTitle({ name, gender, className }) {
-  const Icon = GENDER_ICON_MAP[gender] || (
-    <Genderless width={24} height={24} fill="#999" title="Genderless" />
-  );
+  const Icon = GENDER_ICON_MAP[gender];
 
   return (
     <CardTitleContainer className={className}>

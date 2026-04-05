@@ -84,6 +84,7 @@ export function DataProvider({ children }) {
         nextUrl = data.info.next;
 
         if (nextUrl) {
+          //FYI: Попытка не ронять апи, он то стабильно возвращает, то падает с tooManyRequests
           await sleep(250);
         }
       }

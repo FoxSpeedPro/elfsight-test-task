@@ -6,6 +6,8 @@ import { ReactComponent as CrossIcon } from '../../../assets/icons/cross-icon.sv
 export function FilterSelect({ placeholder, value, options, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
+  // FYI: Была проблема - парсинг species ронял апи с Too many rquests, сначала решила добавить вот такую заглушку
+  // но потом добавила фолбэк в DataProvider - заглушку оставила на всякий случай, хотя технически нужды в ней уже нет
   const isDisabled = !options.length;
 
   useEffect(() => {
