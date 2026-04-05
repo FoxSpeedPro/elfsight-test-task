@@ -1,23 +1,19 @@
 {
   "name": "elfsight-test-task",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "predeploy": "npm run build",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "deploy": "gh-pages -d build",
-    "lint": "eslint --fix --ext .js,.jsx . && npx prettier --write \"src/**/*.js\""
+    "lint": "eslint --fix --ext .js,.jsx . && prettier --write \"src/**/*.js\""
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "lodash": "^4.17.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "react-select": "^5.4.0",
-    "styled-components": "^5.3.5",
-    "tinycolor2": "^1.4.1"
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -35,8 +31,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "gh-pages": "^4.0.0",
     "prettier": "2.2.0",
-    "react-app-rewired": "^2.2.1",
-    "redux": "^4.2.0"
+    "react-app-rewired": "^2.2.1"
   },
   "browserslist": {
     "production": [

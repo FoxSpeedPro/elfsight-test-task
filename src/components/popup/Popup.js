@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
 import { PopupInfo } from './PopupInfo';
+import { useLockScroll } from './hooks/useLockScroll';
 
-export function Popup({ settings: { visible, content = {} }, setSettings }) {
+export function Popup({ content, isOpen, onClose }) {
   const {
     name,
     gender,
@@ -16,21 +18,30 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     episode: episodes
   } = content;
 
-  function togglePopup(e) {
+  useEffect(() => {
+    function handleEscapeClose(e) {
+      if (isOpen && e.key === 'Escape') {
+        onClose();
+      }
+    }
+    document.addEventListener('keydown', handleEscapeClose);
+
+    return () => document.removeEventListener('keydown', handleEscapeClose);
+  }, [onClose, isOpen]);
+
+  useLockScroll(isOpen);
+
+  function handlePopupClick(e) {
     if (e.currentTarget !== e.target) {
       return;
     }
-
-    setSettings((prevState) => ({
-      ...prevState,
-      visible: !prevState.visible
-    }));
+    onClose();
   }
 
   return (
-    <PopupContainer visible={visible}>
+    <PopupContainer visible={isOpen} onClick={handlePopupClick}>
       <StyledPopup>
-        <CloseIcon onClick={togglePopup} />
+        <CloseIcon onClick={onClose} />
 
         <PopupHeader
           name={name}
@@ -61,7 +72,7 @@ const PopupContainer = styled.div`
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s, visible 0.3s;
+  transition: opacity 0.3s, visibility 0.3s;
 
   ${({ visible }) =>
     visible &&
